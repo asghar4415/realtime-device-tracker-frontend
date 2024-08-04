@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import "./style.css";
 
 
 const defaultTheme = createTheme();
@@ -34,10 +35,24 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
+          <div className='head'>
+          <h1 className='head-1'>
+            Nazar
+          </h1>
+          <div >
+            <img src="public/polygonal-vector-illustration-of-city-map-and-location-pin-on-white-background-gps-navigation-system-concept-2PX48BJ.jpg" alt=""
+            className="head-pic" />
+          </div>
+          
+
+          </div>
+          <Typography component="h1" variant="h5"
+          style={
+            {
+               fontFamily: "Josefin Sans",
+               fontSize: "30px",
+            }
+          }>
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={

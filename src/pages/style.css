@@ -1,0 +1,56 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Grey+Qo&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Grey+Qo&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+  .grey-qo-regular {
+    font-family: "Grey Qo", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.josefin-sans {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+.head
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.head-1
+{
+    font-family: "Grey Qo", cursive;
+    font-size: 5rem;
+    
+}
+.head-pic
+{
+    width: 150px;
+    height: 80px;
+}
+
+@media (max-width: 768px) {
+
+    .head
+    {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+    }
+    .head-1
+    {
+        font-size: 4rem;
+    }
+    .head-pic
+    {
+        width: 200px;
+        height: 100px;
+        margin-bottom: -2rem;
+        margin-top: -1rem;
+    }
+}
