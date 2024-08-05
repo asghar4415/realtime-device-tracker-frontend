@@ -13,6 +13,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useState } from "react";
+import { toast, Bounce } from "react-toastify";
+const apiUrl = import.meta.env.VITE_API_URL;
+
 import "./style.css";
 
 
@@ -23,8 +28,64 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
 
-
   const Navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const { email, password } = formData;
+
+    if (!email || !password) {
+      toast.error("Email and password cannot be empty", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      return;
+    }
+
+    try {
+      const loginRsp = await axios.post(`${apiUrl}/login`, formData);
+      localStorage.setItem("token", loginRsp.data.token);
+      toast.success(`Welcome `, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+      Navigate("/dashboard");
+    } catch (err) {
+      toast.error("Either Email or password is incorrect", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  };
+
 
 
 
@@ -46,7 +107,7 @@ export default function SignIn() {
             Nazar
           </h1>
           <div >
-            <img src="public/polygonal-vector-illustration-of-city-map-and-location-pin-on-white-background-gps-navigation-system-concept-2PX48BJ.jpg" alt=""
+            <img src="/polygonal-vector-illustration-of-city-map-and-location-pin-on-white-background-gps-navigation-system-concept-2PX48BJ.jpg" alt=""
             className="head-pic" />
           </div>
           
@@ -73,6 +134,13 @@ export default function SignIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => {
+                // console.log(e.target.value);
+                setFormData((prev) => ({
+                  ...prev,
+                  email: e.target.value,
+                }));
+              }}
             />
             <TextField
               margin="normal"
@@ -83,6 +151,13 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                // console.log(e.target.value);
+                setFormData((prev) => ({
+                  ...prev,
+                  password: e.target.value,
+                }));
+              }}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -93,6 +168,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={submitHandler}
             >
               Sign In
             </Button>
