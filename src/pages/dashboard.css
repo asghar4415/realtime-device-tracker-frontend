@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Grey+Qo&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Grey+Qo&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+  .grey-qo-regular {
+    font-family: "Grey Qo", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.josefin-sans {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+.main
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.homepage
+{
+    width: 98%;
+    height: 98vh;
+   
+    border-radius: 10px;
+    background-color: #dadada;
+}
+
+.navbar-1
+{
+    border-radius:  10px 10px 0 0;
+    margin-bottom: 3rem;
+
+}
+.navbar-1-1
+{
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(8, 89, 203, 0.733);
+
+}
+.inner-nav
+{
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+.container1
+{  
+    font-family: "Josefin Sans", sans-serif;
+
+    display: flex;
+    justify-content: center;
+}
+.header-1
+{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px)
+{
+    .inner-nav
+    {
+        margin-left: 0rem;
+        margin-right: 0rem;
+    }
+}

@@ -56,8 +56,11 @@ export default function SignIn() {
       return;
     }
 
-    try {
+    
       const loginRsp = await axios.post(`${apiUrl}/login`, formData);
+      // console.log(loginRsp);
+      if(loginRsp.data.status === true){
+
       localStorage.setItem("token", loginRsp.data.token);
       toast.success(`Welcome `, {
         position: "top-right",
@@ -71,7 +74,9 @@ export default function SignIn() {
         transition: Bounce,
       });
       Navigate("/dashboard");
-    } catch (err) {
+    } else {
+
+   
       toast.error("Either Email or password is incorrect", {
         position: "top-right",
         autoClose: 2000,
@@ -159,10 +164,10 @@ export default function SignIn() {
                 }));
               }}
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
