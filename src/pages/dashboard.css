@@ -51,7 +51,10 @@
     font-family: "Josefin Sans", sans-serif;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+
 }
 .header-1
 {
@@ -61,6 +64,37 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+.header-2
+{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.input-members
+{
+    width: 70%;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+
+.memberstable
+{
+    width: 70%;
+    border-collapse: collapse;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+}
+.table-class-1
+{
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.button-1
+{
+    border: 1px solid #000;
+}
 
 @media (max-width: 768px)
 {
@@ -69,4 +103,14 @@
         margin-left: 0rem;
         margin-right: 0rem;
     }
+    .header-1
+{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
 }
