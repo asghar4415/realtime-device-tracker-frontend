@@ -70,6 +70,8 @@ export default function AddMembers() {
             if (response.data.data.email === memberAddEmail) {
 
                 const addMember = await addMembertoprofile();
+                // console.log(addMember);
+
 
                 if (addMember.status == true) {
                     setSnackbarMessage("Member Added");
@@ -78,7 +80,7 @@ export default function AddMembers() {
 
                 }
                 else {
-                    setSnackbarMessage("Member already added");
+                    setSnackbarMessage("Member already added / You cannot add yourself");
                     setSnackbarType("error");
                     setOpen(true);
                 }
