@@ -11,14 +11,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import "../pages/dashboard.css";
-import { useNavigate } from "react-router-dom";
-
-import { styled } from '@mui/material/styles';
+import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
+import { styled } from '@mui/material/styles';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -72,8 +70,10 @@ const IOSSwitch = styled((props) => (
 }));
 
 function ResponsiveAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [live, setLive] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -81,21 +81,27 @@ function ResponsiveAppBar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const Navigate = useNavigate();
+
+  const handleToggleLive = async () => {
+    try {
+
+      setLive(!live);
+      
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
 
   return (
     <AppBar position="static" className="navbar-1">
       <Container maxWidth="xl" className="navbar-1-1">
         <Toolbar disableGutters className="inner-nav">
-          {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
@@ -148,7 +154,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   onClick={() => {
-                    Navigate("/profile");
+                    navigate("/profile");
                   }}
                 >
                   Profile
@@ -158,7 +164,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   onClick={() => {
-                    Navigate("/dashboard");
+                    navigate("/dashboard");
                   }}
                 >
                   Dashboard
@@ -168,7 +174,7 @@ function ResponsiveAppBar() {
                 <Typography
                   textAlign="center"
                   onClick={() => {
-                    Navigate("/addmembers");
+                    navigate("/addmembers");
                   }}
                 >
                   Add members
@@ -198,7 +204,7 @@ function ResponsiveAppBar() {
             <Button
               onClick={() => {
                 handleCloseNavMenu();
-                Navigate("/profile");
+                navigate("/profile");
               }}
               style={{
                 fontFamily: "Josefin Sans",
@@ -210,7 +216,7 @@ function ResponsiveAppBar() {
             <Button
               onClick={() => {
                 handleCloseNavMenu();
-                Navigate("/dashboard");
+                navigate("/dashboard");
               }}
               style={{
                 fontFamily: "Josefin Sans",
@@ -225,7 +231,7 @@ function ResponsiveAppBar() {
               }}
               onClick={() => {
                 handleCloseNavMenu();
-                Navigate("/addmembers");
+                navigate("/addmembers");
               }}
               sx={{ my: 2, color: "white", display: "block" }}
             >
@@ -233,15 +239,18 @@ function ResponsiveAppBar() {
             </Button>
           </Box>
 
-          <Box sx={{ flexGrow: 0 }} className="live-btn" >
-
+          <Box sx={{ flexGrow: 0 }} className="live-btn">
             <FormGroup>
-
               <FormControlLabel
-               label="Go live"
-               control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                label="Go live"
+                control={
+                  <IOSSwitch
+                    sx={{ m: 1 }}
+                    checked={live}
+                    onChange={handleToggleLive}
+                  />
+                }
               />
-
             </FormGroup>
 
             <Tooltip title="Open settings">
@@ -273,7 +282,7 @@ function ResponsiveAppBar() {
                   }}
                   onClick={() => {
                     localStorage.removeItem("token");
-                    Navigate("/");
+                    navigate("/");
                   }}
                 >
                   Logout
@@ -286,4 +295,5 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
+
 export default ResponsiveAppBar;
