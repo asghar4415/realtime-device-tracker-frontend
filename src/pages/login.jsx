@@ -135,7 +135,7 @@ export default function SignIn() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email Address: asghar778788@gmail.com"
               name="email"
               autoComplete="email"
               autoFocus
@@ -152,7 +152,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Password: @asghar123"
               type="password"
               id="password"
               autoComplete="current-password"
