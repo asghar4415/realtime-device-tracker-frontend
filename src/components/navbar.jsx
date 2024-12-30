@@ -15,8 +15,11 @@ import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
+
 
 const IOSSwitch = styled((props) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -72,8 +75,11 @@ const IOSSwitch = styled((props) => (
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [live, setLive] = useState(false);
+  const [live, setLive] = useState();
   const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+      const user = JSON.parse(atob(token.split(".")[1]));
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -88,15 +94,60 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const handleToggleLive = async () => {
-    try {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/dashboard`, {
+          params: { email: user.email },
+        });
+        console.log(response);
+  
+        if (response.data.data.live === "false") {
+          setLive(false);
+        } else if(response.data.data.live === "true") {
+          setLive(true);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
+    fetchData(); // Call the async function
+  }, []);
+  
+  
 
-      setLive(!live);
-      
+  
+
+  const handleToggleLive = async () => {
+    console.log("Toggling live status");
+    try {
+      console.log("Live status:", live);
+      if (live == "false") {
+        console.log("Sending request to /golive");
+        const response = await axios.post(`${apiUrl}/golive`, {
+          email: user.email,
+        });
+        console.log("Response data:", response.data); // Log actual data
+        setLive(true);
+      } else if (live ==  "true") {
+        console.log("Sending request to /endlive");
+        const response = await axios.post(`${apiUrl}/endlive`, {
+          email: user.email,
+        });
+        console.log("Response data:", response.data); // Log actual data
+        setLive(false);
+      }
+      else{
+        console.log("Error");
+      }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error toggling live status:", error);
     }
   };
+  
+  
+  
 
   return (
     <AppBar position="static" className="navbar-1">
